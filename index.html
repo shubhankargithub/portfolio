@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubhankar Rahul Chavan — Cybersecurity · AI · Technology</title>
+    <meta name="description" content="Portfolio of Shubhankar Rahul Chavan — Cybersecurity professional, AI enthusiast, and technology builder based in Pune, Maharashtra, India.">
+    <meta name="keywords" content="Shubhankar Rahul Chavan, Cybersecurity, Cyber Security, Security Operations, SC-200, Microsoft Sentinel, AI, LLM Evaluation, Python, Software Development, Web Development, B.Tech Cyber Security, Pune">
+    <meta name="author" content="Shubhankar Rahul Chavan">
+    <meta property="og:title" content="Shubhankar Rahul Chavan — Cybersecurity · AI · Technology">
+    <meta property="og:description" content="Building at the intersection of technology, cybersecurity, software and business.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shubhankar Rahul Chavan — Cybersecurity · AI · Technology">
+    <meta name="twitter:description" content="Building at the intersection of technology, cybersecurity, software and business.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-hex"></div>
+            <div class="loader-text">SC</div>
+        </div>
+    </div>
+
+    <!-- Three.js -->
+    <script src="lib/three.min.js"></script>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">
+                <span class="logo-bracket">{</span>SC<span class="logo-bracket">}</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#cybersecurity" class="nav-link">Cybersecurity</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#ai" class="nav-link">AI</a>
+                <a href="#beyond-tech" class="nav-link">Beyond Tech</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <a href="#home" class="mobile-link">Home</a>
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#experience" class="mobile-link">Experience</a>
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#cybersecurity" class="mobile-link">Cybersecurity</a>
+            <a href="#certifications" class="mobile-link">Certifications</a>
+                <a href="#skills" class="mobile-link">Skills</a>
+                <a href="#ai" class="mobile-link">AI</a>
+                <a href="#beyond-tech" class="mobile-link">Beyond Tech</a>
+                <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-canvas-wrapper">
+            <canvas class="hero-canvas" id="heroCanvas"></canvas>
+            <div class="hero-overlay"></div>
+            <div class="hero-glow" id="heroGlow"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">
+                <span class="badge-dot"></span>
+                Available for Opportunities
+            </div>
+            <h1 class="hero-name">
+                <span class="hero-line reveal" style="--delay: 0.1s">SHUBHANKAR</span>
+                <span class="hero-line reveal" style="--delay: 0.2s">RAHUL CHAVAN</span>
+            </h1>
+            <p class="hero-tagline reveal" style="--delay: 0.35s">Technology · Cybersecurity · AI · Business</p>
+            <p class="hero-intro reveal" style="--delay: 0.45s">Building at the intersection of technology, cybersecurity, software and business.</p>
+            <div class="hero-actions reveal" style="--delay: 0.55s">
+                <a href="#projects" class="btn btn-primary">Explore My Work</a>
+                <a href="assets/resume.pdf" download class="btn btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download Resume
+                </a>
+                <a href="#contact" class="btn btn-outline">Let's Connect</a>
+            </div>
+            <div class="hero-socials reveal" style="--delay: 0.65s">
+                <a href="https://github.com/shubhankargithub" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/shubhankarchavan/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="mailto:shubhankarchavan01@gmail.com" class="social-link" aria-label="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">01</span>
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <div class="image-frame">
+                        <img src="assets/profile.jpg" alt="Shubhankar Rahul Chavan" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="image-placeholder" style="display:none">
+                            <span>SC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h3 class="about-name reveal">Shubhankar Rahul Chavan</h3>
+                    <p class="about-role reveal">B.Tech. CSE — Cyber Security and Forensic</p>
+                    <p class="about-location reveal">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Pune, Maharashtra, India
+                    </p>
+                    <div class="about-text reveal">
+                        <p>I am a cybersecurity professional and technology builder with a deep interest in the mechanics of security, intelligence systems, and the practical application of AI. My work spans security operations, threat detection, software development, and business technology — driven by a structured, analytical mindset.</p>
+                        <p>With experience in Microsoft Sentinel, Microsoft Defender, KQL, and hands-on penetration testing tools, I approach security as both a discipline and a craft. I am particularly drawn to LLM evaluation, prompt analysis, and the intersection of logical reasoning with AI quality assurance — where pattern recognition meets structured thinking.</p>
+                        <p>Beyond the technical, I bring operational experience from leading web development and project management at Chavan Industrial Group, and currently serve as a Business Development Executive at Intellipaat Software Solutions. I believe in building systems that are not only functional but resilient.</p>
+                    </div>
+                    <div class="about-stats reveal">
+                        <div class="stat">
+                            <span class="stat-number" data-count="9">0</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="4">0</span>
+                            <span class="stat-label">Certifications</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="2">0</span>
+                            <span class="stat-label">Roles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section section-alt" id="experience">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">02</span>
+                <h2 class="section-title">Experience</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot active"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <span class="timeline-badge current">Current</span>
+                            <span class="timeline-date">Jul 2026 — Present</span>
+                        </div>
+                        <h3 class="timeline-title">Business Development Executive</h3>
+                        <h4 class="timeline-company">Intellipaat Software Solutions Pvt Ltd</h4>
+                        <ul class="timeline-list">
+                            <li>Driving business growth through strategic client acquisition and relationship management</li>
+                            <li>Identifying and pursuing new business opportunities in the technology education sector</li>
+                            <li>Managing end-to-end sales cycles from lead generation to deal closure</li>
+                            <li>Building partnerships with enterprise clients and understanding their technology training needs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Jan 2025 — Mar 2026</span>
+                        </div>
+                        <h3 class="timeline-title">Web Developer & Project Manager</h3>
+                        <h4 class="timeline-company">Chavan Industrial Group</h4>
+                        <ul class="timeline-list">
+                            <li>Designed and developed web applications for industrial and business operations</li>
+                            <li>Managed project timelines, deliverables, and cross-functional coordination</li>
+                            <li>Built and maintained company web presence including service-specific landing pages</li>
+                            <li>Oversaw digital transformation initiatives for fire safety and industrial compliance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="section-header reveal" style="margin-top: 5rem;">
+                <h2 class="section-title" style="font-size: 1.5rem;">Education</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="education-grid">
+                <div class="edu-card reveal">
+                    <div class="edu-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    </div>
+                    <h4 class="edu-school">MIT School of Computing</h4>
+                    <p class="edu-degree">B.Tech. — CSE — Cyber Security and Forensic</p>
+                    <p class="edu-period">2022 — 2026</p>
+                    <p class="edu-score">CGPA: 7.26 / 10</p>
+                </div>
+                <div class="edu-card reveal">
+                    <div class="edu-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <h4 class="edu-school">Pune Institute</h4>
+                    <p class="edu-degree">12th Standard</p>
+                    <p class="edu-period">2022</p>
+                    <p class="edu-score">82 / 100</p>
+                </div>
+                <div class="edu-card reveal">
+                    <div class="edu-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <h4 class="edu-school">Colonel Parab's School</h4>
+                    <p class="edu-degree">10th Standard · CISCE</p>
+                    <p class="edu-period">2020</p>
+                    <p class="edu-score">72 / 100</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">03</span>
+                <h2 class="section-title">Project Laboratory</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="project-filters reveal">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="cybersecurity">Cybersecurity</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+                <button class="filter-btn" data-filter="siem">SIEM</button>
+                <button class="filter-btn" data-filter="other">Other</button>
+            </div>
+            <div class="project-grid" id="projectGrid">
+                <!-- Project Cards -->
+                <div class="project-card reveal" data-categories="cybersecurity python">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="project-name">SYN Flood DOS/DDoS Attack Script</h3>
+                    <p class="project-desc">Educational script demonstrating SYN flood denial-of-service attack mechanics for security testing and network resilience evaluation.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Network Security</span>
+                        <span class="tag">Ethical Hacking</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/SYN-Flood-DOS-Attack-Script" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="cybersecurity python">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3 class="project-name">IP Discover</h3>
+                    <p class="project-desc">Network reconnaissance tool for discovering and mapping IP addresses within a given range for security auditing purposes.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Networking</span>
+                        <span class="tag">Reconnaissance</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/IP-Discover" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="cybersecurity python">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3 class="project-name">Port Scanner</h3>
+                    <p class="project-desc">High-performance port scanning utility for identifying open ports and services on target systems during penetration testing.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Network Security</span>
+                        <span class="tag">Pentesting</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/Port-Scanner" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="cybersecurity python">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3h6v8H9z"/><path d="M4 11v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><line x1="9" y1="21" x2="15" y2="21"/></svg>
+                    </div>
+                    <h3 class="project-name">Keylogger</h3>
+                    <p class="project-desc">Educational keylogger implementation for understanding input capture mechanisms in cybersecurity awareness training.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Security Testing</span>
+                        <span class="tag">Educational</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/Keylogger" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="web fullstack">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3 class="project-name">Wonderla — Online Ticket Booking</h3>
+                    <p class="project-desc">Full-featured online theme park ticket booking system with responsive design, seat selection, and payment integration concepts.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML/CSS/JS</span>
+                        <span class="tag">Full Stack</span>
+                        <span class="tag">Web Dev</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/Wonderla-ThemePark" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="web fullstack">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    </div>
+                    <h3 class="project-name">Death Wish Coffee — E-Commerce</h3>
+                    <p class="project-desc">Full-stack e-commerce web application with product catalog, shopping cart, and checkout flow for a premium coffee brand.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML/CSS/JS</span>
+                        <span class="tag">E-Commerce</span>
+                        <span class="tag">Full Stack</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/E-Commerce-Web-Application" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="web other">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h3 class="project-name">Portfolio Website</h3>
+                    <p class="project-desc">Personal portfolio website — the very site you are viewing. Built with vanilla HTML, CSS, and JavaScript.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML/CSS/JS</span>
+                        <span class="tag">Design</span>
+                        <span class="tag">Portfolio</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/SHUBHANKAR" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="siem cybersecurity">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="project-name">Logs for Splunk SIEM Practice</h3>
+                    <p class="project-desc">Curated log datasets for practicing SIEM analysis, threat hunting, and security monitoring in Microsoft Splunk.</p>
+                    <div class="project-tags">
+                        <span class="tag">SIEM</span>
+                        <span class="tag">Splunk</span>
+                        <span class="tag">Security Ops</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/Logs-for-Splunk-SIEM-Practice" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+
+                <div class="project-card reveal" data-categories="python other">
+                    <div class="project-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 12h20"/><path d="M2 7h5"/><path d="M2 17h5"/><path d="M17 7h5"/><path d="M17 17h5"/></svg>
+                    </div>
+                    <h3 class="project-name">MAC OUI Finder</h3>
+                    <p class="project-desc">Utility tool for resolving MAC address OUI (Organizationally Unique Identifier) prefixes to identify device manufacturers.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Networking</span>
+                        <span class="tag">Utility</span>
+                    </div>
+                    <a href="https://github.com/shubhankargithub/MAC-OUI-Finder" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cybersecurity Section -->
+    <section class="section section-alt" id="cybersecurity" data-3d-bg="cyber">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">04</span>
+                <h2 class="section-title">Cybersecurity</h2>
+                <div class="section-line"></div>
+            </div>
+            <p class="section-desc reveal">Security operations, threat detection, and ethical hacking — applied across enterprise tools and hands-on practice environments.</p>
+
+            <!-- Security Operations Flow -->
+            <div class="sec-flow reveal">
+                <div class="sec-flow-item">
+                    <div class="sec-flow-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                    <span class="sec-flow-label">DETECT</span>
+                </div>
+                <div class="sec-flow-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </div>
+                <div class="sec-flow-item">
+                    <div class="sec-flow-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <span class="sec-flow-label">ANALYZE</span>
+                </div>
+                <div class="sec-flow-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </div>
+                <div class="sec-flow-item">
+                    <div class="sec-flow-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <span class="sec-flow-label">INVESTIGATE</span>
+                </div>
+                <div class="sec-flow-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </div>
+                <div class="sec-flow-item">
+                    <div class="sec-flow-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+                    </div>
+                    <span class="sec-flow-label">RESPOND</span>
+                </div>
+                <div class="sec-flow-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </div>
+                <div class="sec-flow-item">
+                    <div class="sec-flow-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    </div>
+                    <span class="sec-flow-label">IMPROVE</span>
+                </div>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="sec-skills-grid reveal">
+                <div class="sec-skill-card">
+                    <h4>Security Operations</h4>
+                    <p>SIEM monitoring, incident triage, and security event correlation across enterprise environments.</p>
+                </div>
+                <div class="sec-skill-card">
+                    <h4>Threat Detection</h4>
+                    <p>Identifying indicators of compromise, anomalous behavior patterns, and potential attack vectors.</p>
+                </div>
+                <div class="sec-skill-card">
+                    <h4>Microsoft Sentinel</h4>
+                    <p>Cloud-native SIEM with analytics rules, workbooks, and automated response workflows.</p>
+                </div>
+                <div class="sec-skill-card">
+                    <h4>Microsoft Defender</h4>
+                    <p>Endpoint protection, attack surface reduction, and threat and vulnerability management.</p>
+                </div>
+                <div class="sec-skill-card">
+                    <h4>KQL</h4>
+                    <p>Kusto Query Language for advanced log analysis, threat hunting, and security data exploration.</p>
+                </div>
+                <div class="sec-skill-card">
+                    <h4>Kali Linux & Metasploit</h4>
+                    <p>Penetration testing frameworks for security assessment and vulnerability research.</p>
+                </div>
+                <div class="sec-skill-card">
+                    <h4>Network Security</h4>
+                    <p>Firewall configuration, network traffic analysis, and infrastructure hardening.</p>
+                </div>
+                <div class="sec-skill-card">
+                    <h4>Ethical Hacking</h4>
+                    <p>Authorized security testing to identify vulnerabilities before adversarial exploitation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section" id="certifications">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">05</span>
+                <h2 class="section-title">Certifications</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card featured reveal">
+                    <div class="cert-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15l-2 5l9-13h-5l2-5-9 13h5z"/></svg>
+                    </div>
+                    <h3 class="cert-name">Microsoft Certified: Security Operations Analyst Associate</h3>
+                    <p class="cert-id">SC-200</p>
+                    <p class="cert-provider">Microsoft</p>
+                </div>
+                <div class="cert-card reveal">
+                    <div class="cert-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="cert-name">Cybersecurity for Businesses — The Fundamental Edition</h3>
+                    <p class="cert-provider">EC-Council</p>
+                </div>
+                <div class="cert-card reveal">
+                    <div class="cert-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3 class="cert-name">Make In-House Hacking and Pentesting Lab</h3>
+                    <p class="cert-provider">EC-Council</p>
+                </div>
+                <div class="cert-card reveal">
+                    <div class="cert-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3 class="cert-name">Introduction to Cybersecurity</h3>
+                    <p class="cert-provider">Cisco</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section section-alt" id="skills" data-3d-bg="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">06</span>
+                <h2 class="section-title">Skills</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category reveal">
+                    <h3 class="skill-cat-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Cybersecurity
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Security Operations</span>
+                        <span class="skill-tag">Threat Detection</span>
+                        <span class="skill-tag">Incident Investigation</span>
+                        <span class="skill-tag">SIEM</span>
+                        <span class="skill-tag">Microsoft Sentinel</span>
+                        <span class="skill-tag">Microsoft Defender</span>
+                        <span class="skill-tag">KQL</span>
+                        <span class="skill-tag">Network Security</span>
+                        <span class="skill-tag">Ethical Hacking</span>
+                        <span class="skill-tag">Kali Linux</span>
+                        <span class="skill-tag">Metasploit</span>
+                        <span class="skill-tag">Security Testing</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3 class="skill-cat-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        Programming
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">KQL</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3 class="skill-cat-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        Web Development
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Responsive Design</span>
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Frontend Development</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3 class="skill-cat-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        Software Engineering
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Version Control</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Structured Thinking</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3 class="skill-cat-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        AI / Technology
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LLM Evaluation</span>
+                        <span class="skill-tag">Prompt Analysis</span>
+                        <span class="skill-tag">Logical Reasoning</span>
+                        <span class="skill-tag">Pattern Recognition</span>
+                        <span class="skill-tag">AI Data Operations</span>
+                        <span class="skill-tag">Annotation Workflows</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal">
+                    <h3 class="skill-cat-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Business
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Business Development</span>
+                        <span class="skill-tag">Client Acquisition</span>
+                        <span class="skill-tag">Relationship Management</span>
+                        <span class="skill-tag">Sales Cycles</span>
+                        <span class="skill-tag">Operations Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Section -->
+    <section class="section" id="ai" data-3d-bg="ai">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">07</span>
+                <h2 class="section-title">Exploring AI</h2>
+                <div class="section-line"></div>
+            </div>
+            <p class="section-desc reveal">Interest in the systematic evaluation and improvement of AI systems — from prompt analysis to response quality assessment.</p>
+
+            <div class="ai-flow reveal">
+                <div class="ai-flow-item">
+                    <div class="ai-flow-num">01</div>
+                    <h4>INPUT</h4>
+                    <p>Receiving and parsing queries, prompts, and contextual data for analysis.</p>
+                </div>
+                <div class="ai-flow-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <div class="ai-flow-item">
+                    <div class="ai-flow-num">02</div>
+                    <h4>REASON</h4>
+                    <p>Applying logical reasoning and pattern recognition to interpret intent and context.</p>
+                </div>
+                <div class="ai-flow-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <div class="ai-flow-item">
+                    <div class="ai-flow-num">03</div>
+                    <h4>EVALUATE</h4>
+                    <p>Assessing accuracy, relevance, coherence, and overall response quality.</p>
+                </div>
+                <div class="ai-flow-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <div class="ai-flow-item">
+                    <div class="ai-flow-num">04</div>
+                    <h4>REFINE</h4>
+                    <p>Applying structured feedback loops to improve model outputs iteratively.</p>
+                </div>
+                <div class="ai-flow-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <div class="ai-flow-item">
+                    <div class="ai-flow-num">05</div>
+                    <h4>IMPROVE</h4>
+                    <p>Driving continuous model improvement through annotation workflows and data operations.</p>
+                </div>
+            </div>
+
+            <div class="ai-keywords reveal">
+                <span class="ai-kw">LLM Evaluation</span>
+                <span class="ai-kw">Prompt Analysis</span>
+                <span class="ai-kw">Logical Reasoning</span>
+                <span class="ai-kw">Pattern Recognition</span>
+                <span class="ai-kw">Structured Thinking</span>
+                <span class="ai-kw">Response Quality</span>
+                <span class="ai-kw">Accuracy</span>
+                <span class="ai-kw">Relevance</span>
+                <span class="ai-kw">Coherence</span>
+                <span class="ai-kw">AI Data Operations</span>
+                <span class="ai-kw">Annotation Workflows</span>
+                <span class="ai-kw">Continuous Improvement</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Section -->
+    <section class="section section-alt" id="business">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">08</span>
+                <h2 class="section-title">Business</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="business-content">
+                <div class="business-card reveal">
+                    <h3>Chavan Industrial Group</h3>
+                    <p>Operations spanning industrial services including fire safety systems and compliance solutions. Contributed as Web Developer and Project Manager, building digital infrastructure and managing project delivery.</p>
+                    <div class="business-links">
+                        <a href="https://chavanindustrialgroup.com/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                            Visit Website
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                        <a href="https://chavanindustrialgroup.com/central-railway-fire-safety.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                            Fire Safety Services
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                        <a href="https://chavanindustrialgroup.com/about-founder" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                            About the Founder
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beyond Tech Section -->
+    <section class="section" id="beyond-tech">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">09</span>
+                <h2 class="section-title">Beyond Technology</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="beyond-grid">
+                <div class="beyond-card highlight reveal">
+                    <div class="beyond-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <h3>Music Production</h3>
+                    <div class="beyond-achievement">India's #1 Phonk Artist</div>
+                    <p class="beyond-period">2020 — 2022</p>
+                    <div class="beyond-stat">
+                        <span class="beyond-stat-number">2.5M+</span>
+                        <span class="beyond-stat-label">STREAMS</span>
+                    </div>
+                </div>
+                <div class="beyond-card reveal">
+                    <div class="beyond-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.5 6.5l11 11"/><path d="M3.5 8.5c2-3 4-5 8.5-5s6.5 2 8.5 5c-2 3-4 5-8.5 5s-6.5-2-8.5-5z"/></svg>
+                    </div>
+                    <h3>Fitness</h3>
+                    <p>Dedicated to physical fitness and strength training.</p>
+                </div>
+                <div class="beyond-card reveal">
+                    <div class="beyond-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <h3>Guitar & Keyboard</h3>
+                    <p>Musical instruments as creative outlets.</p>
+                </div>
+                <div class="beyond-card reveal">
+                    <div class="beyond-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>Networking</h3>
+                    <p>Building connections and communication across technology and business communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section section-alt" id="contact" data-3d-bg="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">10</span>
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-main reveal">
+                    <h2 class="contact-name">SHUBHANKAR<br>RAHUL CHAVAN</h2>
+                    <p class="contact-location">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Pune, Maharashtra, India
+                    </p>
+                    <div class="contact-info">
+                        <a href="tel:+919657526862" class="contact-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            +91-9657526862
+                        </a>
+                        <a href="mailto:shubhankarchavan01@gmail.com" class="contact-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            shubhankarchavan01@gmail.com
+                        </a>
+                    </div>
+                    <div class="contact-actions">
+                        <a href="mailto:shubhankarchavan01@gmail.com" class="btn btn-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            Email Me
+                        </a>
+                        <a href="https://www.linkedin.com/in/shubhankarchavan/" target="_blank" rel="noopener" class="btn btn-outline">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Connect on LinkedIn
+                        </a>
+                        <a href="https://github.com/shubhankargithub" target="_blank" rel="noopener" class="btn btn-outline">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            View GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-text">&copy; 2026 Shubhankar Rahul Chavan. All rights reserved.</p>
+                <p class="footer-sub">Built with HTML, CSS & JavaScript.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
