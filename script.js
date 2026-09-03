@@ -39,7 +39,7 @@
         roughness: 0.5,
         wireframe: wireframe,
         transparent: wireframe,
-        opacity: wireframe ? 0.08 : 0.6,
+        opacity: wireframe ? 0.15 : 0.8,
         side: wireframe ? THREE.DoubleSide : THREE.FrontSide
     });
 
@@ -120,7 +120,7 @@
         size: 1,
         vertexColors: true,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.6,
         sizeAttenuation: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending
@@ -161,7 +161,7 @@
     const lineMaterial = new THREE.LineBasicMaterial({
         vertexColors: true,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.15,
         blending: THREE.AdditiveBlending,
         depthWrite: false
     });
@@ -170,18 +170,18 @@
     scene.add(lineSystem);
 
     // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x00d4ff, 0.8, 10);
+    const pointLight1 = new THREE.PointLight(0x00d4ff, 1.2, 10);
     pointLight1.position.set(3, 3, 3);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0x8b5cf6, 0.8, 10);
+    const pointLight2 = new THREE.PointLight(0x8b5cf6, 1.2, 10);
     pointLight2.position.set(-3, -2, 2);
     scene.add(pointLight2);
 
-    const pointLight3 = new THREE.PointLight(0xffffff, 0.4, 10);
+    const pointLight3 = new THREE.PointLight(0xffffff, 0.6, 10);
     pointLight3.position.set(0, 5, 5);
     scene.add(pointLight3);
 
@@ -311,7 +311,7 @@
             if (posAttr.array[i * 3 + 2] > 6) posAttr.array[i * 3 + 2] = -6;
 
             // Pulsing alpha
-            alphaAttr.array[i] = 0.05 + 0.25 * (0.5 + 0.5 * Math.sin(time * 2 + i * 0.1));
+            alphaAttr.array[i] = 0.1 + 0.35 * (0.5 + 0.5 * Math.sin(time * 2 + i * 0.1));
         }
 
         posAttr.needsUpdate = true;
