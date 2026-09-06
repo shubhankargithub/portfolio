@@ -1268,10 +1268,298 @@ if (!prefersReducedMotion) {
         return { scene, camera, renderer, canvasWrapper, container };
     }
 
+    // Create scene on existing canvas element
+    function createSectionSceneOnCanvas(canvas, type) {
+        const section = canvas.closest('section');
+        const container = section.querySelector('.container') || section;
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+        camera.position.z = 10;
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: true,
+            alpha: true,
+            powerPreference: 'high-performance'
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setClearColor(0x000000, 0);
+
+        const objects = [];
+        const time = { value: 0 };
+
+        const createMaterial = (color, wireframe) => new THREE.MeshStandardMaterial({
+            color: color,
+            metalness: 0.2,
+            roughness: 0.5,
+            wireframe: wireframe,
+            transparent: wireframe,
+            opacity: wireframe ? 0.12 : 0.7,
+            side: wireframe ? THREE.DoubleSide : THREE.FrontSide
+        });
+
+        // Reuse the same scene creation logic but with more prominent objects
+        if (type === 'about') {
+            // Large central geometric shapes
+            const geometries = [
+                { geo: new THREE.IcosahedronGeometry(1.5, 0), color: 0x00d4ff, wireframe: true },
+                { geo: new THREE.OctahedronGeometry(1.1, 0), color: 0x8b5cf6, wireframe: false },
+                { geo: new THREE.TetrahedronGeometry(0.9, 0), color: 0x00d4ff, wireframe: true },
+                { geo: new THREE.DodecahedronGeometry(0.7, 0), color: 0x8b5cf6, wireframe: false }
+            ];
+            geometries.forEach((g, i) => {
+                const mesh = new THREE.Mesh(g.geo, createMaterial(g.color, g.wireframe));
+                mesh.position.set(
+                    (i % 2 === 0 ? 1 : -1) * 1.5,
+                    (i < 2 ? 1 : -1) * 1.2,
+                    -1
+                );
+                mesh.userData = {
+                    basePos: mesh.position.clone(),
+                    rotSpeed: new THREE.Euler(
+                        (Math.random() - 0.5) * 0.002,
+                        (Math.random() - 0.5) * 0.003,
+                        (Math.random() - 0.5) * 0.001
+                    ),
+                    floatSpeed: 0.2 + Math.random() * 0.2,
+                    floatAmp: 0.3,
+                    offset: i * Math.PI / 2
+                };
+                scene.add(mesh);
+                objects.push(mesh);
+            });
+            // Central pulsing orb
+            const coreGeo = new THREE.SphereGeometry(0.6, 32, 32);
+            const coreMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.15, side: THREE.DoubleSide });
+            const core = new THREE.Mesh(coreGeo, coreMat);
+            core.userData = { isCore: true, pulseSpeed: 1.2, pulseAmp: 0.25 };
+            scene.add(core);
+            objects.push(core);
+        } else if (type === 'experience') {
+            // Timeline nodes
+            for (let i = 0; i < 6; i++) {
+                const geo = new THREE.SphereGeometry(0.4, 16, 16);
+                const mat = createMaterial(i % 2 === 0 ? 0x00d4ff : 0x8b5cf6, false);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(0, (i - 2.5) * 2, -2);
+                mesh.userData = { basePos: mesh.position.clone(), floatSpeed: 0.4, floatAmp: 0.4, offset: i, pulseSpeed: 1 + i * 0.2, pulseAmp: 0.15 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+            // Vertical connecting line
+            const lineGeo = new THREE.BufferGeometry();
+            const linePos = [];
+            for (let i = 0; i < 5; i++) {
+                linePos.push(0, (i - 2.5) * 2, -2);
+                linePos.push(0, (i - 1.5) * 2, -2);
+            }
+            lineGeo.setAttribute('position', new Float32BufferAttribute(linePos, 3));
+            const lineMat = new THREE.LineBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.2, depthWrite: false });
+            scene.add(new THREE.LineSegments(lineGeo, lineMat));
+        } else if (type === 'projects') {
+            // Floating code brackets
+            const symbols = ['{ }', '< />', '[ ]', '( )', '=>', 'async', 'await', 'const'];
+            for (let i = 0; i < 12; i++) {
+                const geo = new THREE.BoxGeometry(0.8, 0.8, 0.2);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, Math.random() > 0.6);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6 - 2);
+                mesh.userData = { basePos: mesh.position.clone(), rotSpeed: new THREE.Euler(0, (Math.random() - 0.5) * 0.004, 0), floatSpeed: 0.15, floatAmp: 0.5, offset: Math.random() * Math.PI * 2 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+        } else if (type === 'cyber') {
+            // Shield-like geometric shapes
+            for (let i = 0; i < 8; i++) {
+                const geo = new THREE.IcosahedronGeometry(0.5 + Math.random() * 0.4, 0);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, Math.random() > 0.5);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6 - 2);
+                mesh.userData = { basePos: mesh.position.clone(), rotSpeed: new THREE.Euler((Math.random() - 0.5) * 0.003, (Math.random() - 0.5) * 0.003, (Math.random() - 0.5) * 0.002), floatSpeed: 0.2, floatAmp: 0.4, offset: Math.random() * Math.PI * 2 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+        } else if (type === 'certifications') {
+            // Certificate cards
+            for (let i = 0; i < 6; i++) {
+                const geo = new THREE.BoxGeometry(1.5, 1.1, 0.08);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, true);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 4 - 1);
+                mesh.userData = { basePos: mesh.position.clone(), rotSpeed: new THREE.Euler(0, (Math.random() - 0.5) * 0.002, 0), floatSpeed: 0.1, floatAmp: 0.3, offset: Math.random() * Math.PI * 2 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+            // Gold particles
+            const pGeo = new THREE.BufferGeometry();
+            const pCount = 120;
+            const pPos = new Float32Array(pCount * 3);
+            const pCol = new Float32Array(pCount * 3);
+            const pSize = new Float32Array(pCount);
+            for (let i = 0; i < pCount; i++) {
+                pPos[i*3] = (Math.random() - 0.5) * 16;
+                pPos[i*3+1] = (Math.random() - 0.5) * 12;
+                pPos[i*3+2] = (Math.random() - 0.5) * 6 - 2;
+                pCol[i*3] = 1; pCol[i*3+1] = 0.85 + Math.random() * 0.15; pCol[i*3+2] = 0.2 + Math.random() * 0.3;
+                pSize[i] = Math.random() * 1.5 + 0.5;
+            }
+            pGeo.setAttribute('position', new Float32BufferAttribute(pPos, 3));
+            pGeo.setAttribute('color', new Float32BufferAttribute(pCol, 3));
+            pGeo.setAttribute('size', new Float32BufferAttribute(pSize, 1));
+            const pMat = new THREE.PointsMaterial({ size: 1, vertexColors: true, transparent: true, opacity: 0.5, sizeAttenuation: true, depthWrite: false, blending: THREE.AdditiveBlending });
+            const particles = new THREE.Points(pGeo, pMat);
+            particles.userData = { isParticles: true, geo: pGeo, type: 'certifications' };
+            scene.add(particles);
+            objects.push(particles);
+        } else if (type === 'skills') {
+            // Polyhedrons
+            const shapes = [() => new THREE.TetrahedronGeometry(0.5), () => new THREE.OctahedronGeometry(0.45), () => new THREE.IcosahedronGeometry(0.4), () => new THREE.BoxGeometry(0.6, 0.6, 0.6)];
+            for (let i = 0; i < 10; i++) {
+                const geo = shapes[Math.floor(Math.random() * shapes.length)]();
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, Math.random() > 0.5);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6 - 2);
+                mesh.userData = { basePos: mesh.position.clone(), rotSpeed: new THREE.Euler((Math.random() - 0.5) * 0.004, (Math.random() - 0.5) * 0.004, (Math.random() - 0.5) * 0.003), floatSpeed: 0.2, floatAmp: 0.4, offset: Math.random() * Math.PI * 2 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+        } else if (type === 'ai') {
+            // Neural nodes
+            for (let i = 0; i < 18; i++) {
+                const geo = new THREE.SphereGeometry(0.2 + Math.random() * 0.15, 12, 12);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x8b5cf6 : 0x00d4ff, false);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set((Math.random() - 0.5) * 16, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 8 - 3);
+                mesh.userData = { basePos: mesh.position.clone(), floatSpeed: 0.05 + Math.random() * 0.15, offset: Math.random() * Math.PI * 2, pulseSpeed: 0.5 + Math.random() * 1, pulseAmp: 0.08 + Math.random() * 0.12 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+        } else if (type === 'business') {
+            // Building/block shapes
+            for (let i = 0; i < 10; i++) {
+                const geo = new THREE.BoxGeometry(0.6 + Math.random() * 0.4, 0.8 + Math.random() * 0.6, 0.6 + Math.random() * 0.4);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, Math.random() > 0.5);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6 - 2);
+                mesh.userData = { basePos: mesh.position.clone(), rotSpeed: new THREE.Euler(0, (Math.random() - 0.5) * 0.0015, 0), floatSpeed: 0.1, floatAmp: 0.25, offset: Math.random() * Math.PI * 2 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+        } else if (type === 'beyond') {
+            // Creative shapes
+            for (let i = 0; i < 10; i++) {
+                const shapeType = Math.random();
+                let geo;
+                if (shapeType < 0.25) geo = new THREE.TorusGeometry(0.4, 0.1, 8, 16);
+                else if (shapeType < 0.5) geo = new THREE.ConeGeometry(0.3, 0.9, 4);
+                else if (shapeType < 0.75) geo = new THREE.CylinderGeometry(0.15, 0.15, 1, 8);
+                else geo = new THREE.SphereGeometry(0.3, 16, 16);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x8b5cf6 : 0x00d4ff, Math.random() > 0.5);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set((Math.random() - 0.5) * 16, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 8 - 3);
+                mesh.userData = { basePos: mesh.position.clone(), rotSpeed: new THREE.Euler((Math.random() - 0.5) * 0.003, (Math.random() - 0.5) * 0.004, (Math.random() - 0.5) * 0.002), floatSpeed: 0.15, floatAmp: 0.6, offset: Math.random() * Math.PI * 2 };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+        } else if (type === 'contact') {
+            // Signal particles
+            const pGeo = new THREE.BufferGeometry();
+            const pCount = 150;
+            const pPos = new Float32Array(pCount * 3);
+            const pCol = new Float32Array(pCount * 3);
+            const pSize = new Float32Array(pCount);
+            for (let i = 0; i < pCount; i++) {
+                pPos[i*3] = (Math.random() - 0.5) * 18;
+                pPos[i*3+1] = (Math.random() - 0.5) * 14;
+                pPos[i*3+2] = (Math.random() - 0.5) * 8 - 3;
+                const c = Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6;
+                pCol[i*3] = (c >> 16 & 255) / 255; pCol[i*3+1] = (c >> 8 & 255) / 255; pCol[i*3+2] = (c & 255) / 255;
+                pSize[i] = Math.random() * 1.5 + 0.5;
+            }
+            pGeo.setAttribute('position', new Float32BufferAttribute(pPos, 3));
+            pGeo.setAttribute('color', new Float32BufferAttribute(pCol, 3));
+            pGeo.setAttribute('size', new Float32BufferAttribute(pSize, 1));
+            const pMat = new THREE.PointsMaterial({ size: 1, vertexColors: true, transparent: true, opacity: 0.6, sizeAttenuation: true, depthWrite: false, blending: THREE.AdditiveBlending });
+            const particles = new THREE.Points(pGeo, pMat);
+            particles.userData = { isParticles: true, geo: pGeo };
+            scene.add(particles);
+            objects.push(particles);
+        }
+
+        // Lights
+        scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+        const light1 = new THREE.PointLight(0x00d4ff, 1, 20); light1.position.set(5, 5, 5); scene.add(light1);
+        const light2 = new THREE.PointLight(0x8b5cf6, 1, 20); light2.position.set(-5, -3, 3); scene.add(light2);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            time.value += 0.016;
+
+            objects.forEach(obj => {
+                if (obj.userData.isParticles) {
+                    const positions = obj.userData.geo.getAttribute('position');
+                    const pType = obj.userData.type || 'default';
+                    if (pType === 'certifications') {
+                        for (let i = 0; i < positions.count; i++) {
+                            positions.array[i*3+1] += Math.sin(time.value * 1.5 + i * 0.1) * 0.0015;
+                            positions.array[i*3] += Math.cos(time.value * 1.2 + i * 0.1) * 0.001;
+                        }
+                    } else {
+                        for (let i = 0; i < positions.count; i++) {
+                            positions.array[i*3+1] += Math.sin(time.value * 2 + i * 0.1) * 0.002;
+                            positions.array[i*3] += Math.cos(time.value * 1.5 + i * 0.1) * 0.001;
+                        }
+                    }
+                    positions.needsUpdate = true;
+                    obj.rotation.y += 0.0001;
+                } else if (obj.userData.isCore) {
+                    const scale = 1 + Math.sin(time.value * obj.userData.pulseSpeed) * obj.userData.pulseAmp;
+                    obj.scale.setScalar(scale);
+                    obj.rotation.y += 0.0005;
+                    obj.rotation.x += 0.0003;
+                } else {
+                    obj.rotation.x += obj.userData.rotSpeed?.x || 0;
+                    obj.rotation.y += obj.userData.rotSpeed?.y || 0;
+                    obj.rotation.z += obj.userData.rotSpeed?.z || 0;
+                    if (obj.userData.floatSpeed) {
+                        obj.position.y = obj.userData.basePos.y + Math.sin(time.value * obj.userData.floatSpeed + obj.userData.offset) * obj.userData.floatAmp;
+                        obj.position.x = obj.userData.basePos.x + Math.cos(time.value * obj.userData.floatSpeed * 0.7 + obj.userData.offset) * obj.userData.floatAmp * 0.5;
+                    }
+                    if (obj.userData.pulseSpeed) {
+                        const scale = 1 + Math.sin(time.value * obj.userData.pulseSpeed) * obj.userData.pulseAmp;
+                        obj.scale.setScalar(scale);
+                    }
+                }
+            });
+
+            camera.position.x = Math.sin(time.value * 0.05) * 0.5;
+            camera.position.y = Math.cos(time.value * 0.03) * 0.3;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        return { scene, camera, renderer, canvas, container };
+    }
+
     sections.forEach(section => {
         const type = section.getAttribute('data-3d-bg');
         const sceneData = createSectionScene(section, type);
         sectionScenes.set(section, sceneData);
+    });
+
+    // Also create scenes for prominent section-3d-canvas elements
+    const canvasElements = document.querySelectorAll('.section-3d-canvas');
+    canvasElements.forEach(canvasEl => {
+        const section = canvasEl.closest('section');
+        if (section) {
+            const type = section.getAttribute('data-3d-bg') || section.id;
+            const sceneData = createSectionSceneOnCanvas(canvasEl, type);
+            sectionScenes.set(canvasEl, sceneData);
+        }
     });
 
     // Handle resize
