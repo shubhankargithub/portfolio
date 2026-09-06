@@ -912,7 +912,7 @@ if (!prefersReducedMotion) {
             }
             particleGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
             particleGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-            particleGeo.setAttribute('size', new THREE.BufferAttribute(size, 1));
+            particleGeo.setAttribute('size', new Float32BufferAttribute(size, 1));
             const particleMat = new THREE.PointsMaterial({
                 size: 1, vertexColors: true, transparent: true, opacity: 0.6,
                 sizeAttenuation: true, depthWrite: false, blending: THREE.AdditiveBlending
@@ -921,6 +921,265 @@ if (!prefersReducedMotion) {
             scene.add(particles);
             objects.push(particles);
             objects[0].userData = { isParticles: true, geo: particleGeo };
+        } else if (type === 'experience') {
+            // 3D Timeline with floating nodes and connecting lines
+            const nodeCount = 8;
+            for (let i = 0; i < nodeCount; i++) {
+                const geo = new THREE.SphereGeometry(0.25 + Math.random() * 0.2, 16, 16);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, false);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(
+                    (Math.random() - 0.5) * 14,
+                    (i - nodeCount/2) * 2.5 + (Math.random() - 0.5) * 1,
+                    (Math.random() - 0.5) * 6 - 2
+                );
+                mesh.userData = {
+                    basePos: mesh.position.clone(),
+                    floatSpeed: 0.3 + Math.random() * 0.4,
+                    floatAmp: 0.3 + Math.random() * 0.3,
+                    offset: Math.random() * Math.PI * 2,
+                    pulseSpeed: 0.8 + Math.random() * 1.2,
+                    pulseAmp: 0.1 + Math.random() * 0.15
+                };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+            // Connection lines between timeline nodes
+            const lineGeo = new THREE.BufferGeometry();
+            const linePos = [];
+            for (let i = 0; i < objects.length; i++) {
+                for (let j = i + 1; j < objects.length; j++) {
+                    const dx = objects[i].position.x - objects[j].position.x;
+                    const dy = objects[i].position.y - objects[j].position.y;
+                    const dz = objects[i].position.z - objects[j].position.z;
+                    const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+                    if (dist < 3.5) {
+                        linePos.push(objects[i].position.x, objects[i].position.y, objects[i].position.z);
+                        linePos.push(objects[j].position.x, objects[j].position.y, objects[j].position.z);
+                    }
+                }
+            }
+            lineGeo.setAttribute('position', new Float32BufferAttribute(linePos, 3));
+            const lineMat = new THREE.LineBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.12, depthWrite: false });
+            const lines = new THREE.LineSegments(lineGeo, lineMat);
+            scene.add(lines);
+            objects.push(lines);
+        } else if (type === 'projects') {
+            // Floating code brackets and tech symbols
+            const symbols = ['{ }', '< />', '[ ]', '( )', ';', '=>', '() =>', 'async'];
+            for (let i = 0; i < 20; i++) {
+                const geo = new THREE.BoxGeometry(0.6, 0.6, 0.15);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, Math.random() > 0.6);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(
+                    (Math.random() - 0.5) * 18,
+                    (Math.random() - 0.5) * 14,
+                    (Math.random() - 0.5) * 8 - 3
+                );
+                mesh.userData = {
+                    basePos: mesh.position.clone(),
+                    rotSpeed: new THREE.Euler(
+                        (Math.random() - 0.5) * 0.002,
+                        (Math.random() - 0.5) * 0.003,
+                        (Math.random() - 0.5) * 0.001
+                    ),
+                    floatSpeed: 0.15 + Math.random() * 0.25,
+                    floatAmp: 0.4 + Math.random() * 0.5,
+                    offset: Math.random() * Math.PI * 2
+                };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+            // Floating particles around code symbols
+            const particleGeo = new THREE.BufferGeometry();
+            const pCount = 150;
+            const pPos = new Float32Array(pCount * 3);
+            const pCol = new Float32Array(pCount * 3);
+            const pSize = new Float32Array(pCount);
+            for (let i = 0; i < pCount; i++) {
+                pPos[i*3] = (Math.random() - 0.5) * 20;
+                pPos[i*3+1] = (Math.random() - 0.5) * 16;
+                pPos[i*3+2] = (Math.random() - 0.5) * 10 - 4;
+                const c = Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6;
+                pCol[i*3] = (c >> 16 & 255) / 255;
+                pCol[i*3+1] = (c >> 8 & 255) / 255;
+                pCol[i*3+2] = (c & 255) / 255;
+                pSize[i] = Math.random() * 1 + 0.3;
+            }
+            particleGeo.setAttribute('position', new Float32BufferAttribute(pPos, 3));
+            particleGeo.setAttribute('color', new Float32BufferAttribute(pCol, 3));
+            particleGeo.setAttribute('size', new Float32BufferAttribute(pSize, 1));
+            const pMat = new THREE.PointsMaterial({
+                size: 1, vertexColors: true, transparent: true, opacity: 0.4,
+                sizeAttenuation: true, depthWrite: false, blending: THREE.AdditiveBlending
+            });
+            const particles = new THREE.Points(particleGeo, pMat);
+            scene.add(particles);
+            objects.push(particles);
+            objects[objects.length-1].userData = { isParticles: true, geo: particleGeo, type: 'projects' };
+        } else if (type === 'about') {
+            // Floating geometric shapes around profile area
+            const shapes = [
+                () => new THREE.TorusGeometry(0.4, 0.12, 8, 16),
+                () => new THREE.OctahedronGeometry(0.35),
+                () => new THREE.IcosahedronGeometry(0.3),
+                () => new THREE.ConeGeometry(0.3, 0.6, 5),
+                () => new THREE.TetrahedronGeometry(0.3)
+            ];
+            for (let i = 0; i < 12; i++) {
+                const geo = shapes[Math.floor(Math.random() * shapes.length)]();
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, Math.random() > 0.4);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(
+                    (Math.random() - 0.5) * 12,
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 6 - 2
+                );
+                mesh.userData = {
+                    basePos: mesh.position.clone(),
+                    rotSpeed: new THREE.Euler(
+                        (Math.random() - 0.5) * 0.004,
+                        (Math.random() - 0.5) * 0.005,
+                        (Math.random() - 0.5) * 0.003
+                    ),
+                    floatSpeed: 0.2 + Math.random() * 0.3,
+                    floatAmp: 0.5 + Math.random() * 0.5,
+                    offset: Math.random() * Math.PI * 2
+                };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+            // Central glowing orb
+            const coreGeo = new THREE.SphereGeometry(0.8, 32, 32);
+            const coreMat = new THREE.MeshBasicMaterial({
+                color: 0x00d4ff,
+                transparent: true,
+                opacity: 0.15,
+                side: THREE.DoubleSide
+            });
+            const core = new THREE.Mesh(coreGeo, coreMat);
+            core.position.set(0, 0, -1);
+            core.userData = { isCore: true, pulseSpeed: 1.5, pulseAmp: 0.3 };
+            scene.add(core);
+            objects.push(core);
+        } else if (type === 'certifications') {
+            // Floating certificate-like cards and badges
+            for (let i = 0; i < 10; i++) {
+                const geo = new THREE.BoxGeometry(1.2, 0.9, 0.05);
+                const mat = createMaterial(Math.random() > 0.5 ? 0x00d4ff : 0x8b5cf6, true);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(
+                    (Math.random() - 0.5) * 16,
+                    (Math.random() - 0.5) * 12,
+                    (Math.random() - 0.5) * 6 - 2
+                );
+                mesh.userData = {
+                    basePos: mesh.position.clone(),
+                    rotSpeed: new THREE.Euler(
+                        (Math.random() - 0.5) * 0.0015,
+                        (Math.random() - 0.5) * 0.002,
+                        0
+                    ),
+                    floatSpeed: 0.1 + Math.random() * 0.2,
+                    floatAmp: 0.3 + Math.random() * 0.4,
+                    offset: Math.random() * Math.PI * 2
+                };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+            // Golden accent particles
+            const particleGeo = new THREE.BufferGeometry();
+            const pCount = 200;
+            const pPos = new Float32Array(pCount * 3);
+            const pCol = new Float32Array(pCount * 3);
+            const pSize = new Float32Array(pCount);
+            for (let i = 0; i < pCount; i++) {
+                pPos[i*3] = (Math.random() - 0.5) * 18;
+                pPos[i*3+1] = (Math.random() - 0.5) * 14;
+                pPos[i*3+2] = (Math.random() - 0.5) * 8 - 3;
+                pCol[i*3] = 1;
+                pCol[i*3+1] = 0.85 + Math.random() * 0.15;
+                pCol[i*3+2] = 0.2 + Math.random() * 0.3;
+                pSize[i] = Math.random() * 1.5 + 0.5;
+            }
+            particleGeo.setAttribute('position', new Float32BufferAttribute(pPos, 3));
+            particleGeo.setAttribute('color', new Float32BufferAttribute(pCol, 3));
+            particleGeo.setAttribute('size', new Float32BufferAttribute(pSize, 1));
+            const pMat = new THREE.PointsMaterial({
+                size: 1, vertexColors: true, transparent: true, opacity: 0.5,
+                sizeAttenuation: true, depthWrite: false, blending: THREE.AdditiveBlending
+            });
+            const particles = new THREE.Points(particleGeo, pMat);
+            scene.add(particles);
+            objects.push(particles);
+            objects[objects.length-1].userData = { isParticles: true, geo: particleGeo, type: 'certifications' };
+        } else if (type === 'beyond') {
+            // Creative floating shapes - music notes, weights, guitar picks, etc.
+            for (let i = 0; i < 15; i++) {
+                const shapeType = Math.random();
+                let geo;
+                if (shapeType < 0.25) {
+                    geo = new THREE.TorusGeometry(0.3, 0.08, 6, 12); // ring
+                } else if (shapeType < 0.5) {
+                    geo = new THREE.ConeGeometry(0.25, 0.7, 4); // guitar pick
+                } else if (shapeType < 0.75) {
+                    geo = new THREE.CylinderGeometry(0.15, 0.15, 0.8, 8); // dumbbell bar
+                } else {
+                    geo = new THREE.SphereGeometry(0.25, 12, 12); // music note head
+                }
+                const mat = createMaterial(Math.random() > 0.5 ? 0x8b5cf6 : 0x00d4ff, Math.random() > 0.5);
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(
+                    (Math.random() - 0.5) * 18,
+                    (Math.random() - 0.5) * 14,
+                    (Math.random() - 0.5) * 8 - 3
+                );
+                mesh.userData = {
+                    basePos: mesh.position.clone(),
+                    rotSpeed: new THREE.Euler(
+                        (Math.random() - 0.5) * 0.003,
+                        (Math.random() - 0.5) * 0.004,
+                        (Math.random() - 0.5) * 0.002
+                    ),
+                    floatSpeed: 0.15 + Math.random() * 0.25,
+                    floatAmp: 0.6 + Math.random() * 0.6,
+                    offset: Math.random() * Math.PI * 2
+                };
+                scene.add(mesh);
+                objects.push(mesh);
+            }
+            // Flowing particle stream
+            const particleGeo = new THREE.BufferGeometry();
+            const pCount = 180;
+            const pPos = new Float32Array(pCount * 3);
+            const pCol = new Float32Array(pCount * 3);
+            const pSize = new Float32Array(pCount);
+            const pVel = new Float32Array(pCount * 3);
+            for (let i = 0; i < pCount; i++) {
+                pPos[i*3] = (Math.random() - 0.5) * 20;
+                pPos[i*3+1] = (Math.random() - 0.5) * 16;
+                pPos[i*3+2] = (Math.random() - 0.5) * 10 - 4;
+                const c = Math.random() > 0.5 ? 0x8b5cf6 : 0x00d4ff;
+                pCol[i*3] = (c >> 16 & 255) / 255;
+                pCol[i*3+1] = (c >> 8 & 255) / 255;
+                pCol[i*3+2] = (c & 255) / 255;
+                pSize[i] = Math.random() * 1.2 + 0.4;
+                pVel[i*3] = (Math.random() - 0.5) * 0.002;
+                pVel[i*3+1] = (Math.random() - 0.5) * 0.002;
+                pVel[i*3+2] = (Math.random() - 0.5) * 0.002;
+            }
+            particleGeo.setAttribute('position', new Float32BufferAttribute(pPos, 3));
+            particleGeo.setAttribute('color', new Float32BufferAttribute(pCol, 3));
+            particleGeo.setAttribute('size', new Float32BufferAttribute(pSize, 1));
+            particleGeo.setAttribute('velocity', new Float32BufferAttribute(pVel, 3));
+            const pMat = new THREE.PointsMaterial({
+                size: 1, vertexColors: true, transparent: true, opacity: 0.45,
+                sizeAttenuation: true, depthWrite: false, blending: THREE.AdditiveBlending
+            });
+            const particles = new THREE.Points(particleGeo, pMat);
+            scene.add(particles);
+            objects.push(particles);
+            objects[objects.length-1].userData = { isParticles: true, geo: particleGeo, type: 'beyond', velocities: pVel };
         }
 
         // Lights
@@ -939,12 +1198,49 @@ if (!prefersReducedMotion) {
             objects.forEach(obj => {
                 if (obj.userData.isParticles) {
                     const positions = obj.userData.geo.getAttribute('position');
-                    for (let i = 0; i < positions.count; i++) {
-                        positions.array[i*3+1] += Math.sin(time.value * 2 + i * 0.1) * 0.002;
-                        positions.array[i*3] += Math.cos(time.value * 1.5 + i * 0.1) * 0.001;
+                    const type = obj.userData.type || 'default';
+                    
+                    if (type === 'projects' || type === 'certifications') {
+                        // Gentle floating for project/cert particles
+                        for (let i = 0; i < positions.count; i++) {
+                            positions.array[i*3+1] += Math.sin(time.value * 1.5 + i * 0.1) * 0.0015;
+                            positions.array[i*3] += Math.cos(time.value * 1.2 + i * 0.1) * 0.001;
+                            positions.array[i*3+2] += Math.sin(time.value * 0.8 + i * 0.1) * 0.0005;
+                        }
+                    } else if (type === 'beyond') {
+                        // Flowing stream with velocity
+                        const velocities = obj.userData.velocities;
+                        for (let i = 0; i < positions.count; i++) {
+                            positions.array[i*3] += velocities[i*3];
+                            positions.array[i*3+1] += velocities[i*3+1];
+                            positions.array[i*3+2] += velocities[i*3+2];
+                            // Wave motion
+                            positions.array[i*3+1] += Math.sin(time.value * 2 + i * 0.15) * 0.002;
+                            positions.array[i*3] += Math.cos(time.value * 1.8 + i * 0.15) * 0.0015;
+                            
+                            // Wrap around
+                            if (positions.array[i*3] > 10) positions.array[i*3] = -10;
+                            if (positions.array[i*3] < -10) positions.array[i*3] = 10;
+                            if (positions.array[i*3+1] > 8) positions.array[i*3+1] = -8;
+                            if (positions.array[i*3+1] < -8) positions.array[i*3+1] = 8;
+                            if (positions.array[i*3+2] > 3) positions.array[i*3+2] = -6;
+                            if (positions.array[i*3+2] < -6) positions.array[i*3+2] = 3;
+                        }
+                    } else {
+                        // Default contact particles
+                        for (let i = 0; i < positions.count; i++) {
+                            positions.array[i*3+1] += Math.sin(time.value * 2 + i * 0.1) * 0.002;
+                            positions.array[i*3] += Math.cos(time.value * 1.5 + i * 0.1) * 0.001;
+                        }
                     }
                     positions.needsUpdate = true;
                     obj.rotation.y += 0.0001;
+                } else if (obj.userData.isCore) {
+                    // Pulsing core orb
+                    const scale = 1 + Math.sin(time.value * obj.userData.pulseSpeed) * obj.userData.pulseAmp;
+                    obj.scale.setScalar(scale);
+                    obj.rotation.y += 0.0005;
+                    obj.rotation.x += 0.0003;
                 } else {
                     obj.rotation.x += obj.userData.rotSpeed?.x || 0;
                     obj.rotation.y += obj.userData.rotSpeed?.y || 0;
